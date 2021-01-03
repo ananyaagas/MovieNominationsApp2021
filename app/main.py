@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template
 app= Flask(__name__)
 
@@ -6,7 +5,7 @@ app= Flask(__name__)
 def index():
   return "<h1>Welcome to Coding For Shopify</h1>"
 
-@app.route("/schedule")
-def schedule():
+@app.route("/search")
+def search():
   error=None
-  return render_template('schedule.html', error=error)
+  return render_template('search.html', error=error)
