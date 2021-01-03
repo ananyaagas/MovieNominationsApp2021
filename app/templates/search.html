@@ -5,7 +5,15 @@
 <h4>happy new years :  </h4>
 <h4>let's hope we are okay next year :  </h4>
 
-
-
-
+<!--{{results.Search}}-->
+<table>
+{% for result in results.Search %}
+<tr>
+    <td>
+        {{ result.Title }}
+        ({{ result.Year }})
+    </td>
+</tr>
+{% endfor %}
+</table>
 {% endblock %}

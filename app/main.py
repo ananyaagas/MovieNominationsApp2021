@@ -1,4 +1,4 @@
-import requests
+import requests 
 from flask import Flask, render_template
 app= Flask(__name__)
 
@@ -9,7 +9,11 @@ def index():
 @app.route("/search")
 def search():
     query = {}
-    response = requests.get('http://www.omdbapi.com/?i=tt3896198&apikey=85a80fa6', params=query)
+    results = []
+    response = requests.get('http://www.omdbapi.com/?s=guardians&apikey=85a80fa6', params=query)
     print(response.json())
+    results = response.json() 
     error=None
-    return render_template('search.html', error=error)
+    return render_template('search.html', error=error, results=results)
+
+
