@@ -1,10 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Search</title>
+</head>
+
+<body>
+
+Search: <input type="text" id="search_form_input"></input>
+
+<div id="search_id"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+$("#search_form_input").keypress(function(){
+    var text = $(this).val();
+
+    $.ajax({
+      url: "/search",
+      type: "get",
+      data: {jsdata: text},
+      success: function(response) {
+        $("#search_id").html(response);
+      },
+      error: function(xhr) {
+        //Do Something to handle error
+      }
+    });
+});
+</script>
+
+</body>
+
+</html>
 {% extends "base.html" %}
 {% block content %}
-<h1>Ananya is awesome</h1>
-<h4>she is so cool :  </h4>
-<h4>happy new years :  </h4>
-<h4>let's hope we are okay next year :  </h4>
-
+<header>
+Results of your search:
+</header>
 <!--{{results.Search}}-->
 <table>
 {% for result in results.Search %}
