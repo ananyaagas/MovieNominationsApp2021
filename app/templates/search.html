@@ -15,7 +15,7 @@ Search: <input type="text" id="search_form_input"></input>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script>
-$("#search_form_input").keypress(function(){
+$("#search_form_input").keyup(function(){
     var text = $(this).val();
 
     $.ajax({
