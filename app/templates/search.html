@@ -37,18 +37,39 @@ $("#search_form_input").keyup(function(){
 </html>
 {% extends "base.html" %}
 {% block content %}
-<header>
-Results of your search:
-</header>
+
 <!--{{results.Search}}-->
-<table>
-{% for result in results.Search %}
+<div id="box">
+<table style="float:left;width:50%;">
 <tr>
-    <td>
+<th colspan = 3> <header>
+Results of your search:
+
+</header></th></tr>
+{% for result in results.Search %}
+<th></th>
+<th></th>
+</tr>
+<tr>
+<td>
+<img src={{result.Poster}} alt={{result.Title}} style="width:30%;height:32%;">
+</td>
+<td>
         {{ result.Title }}
         ({{ result.Year }})
     </td>
+    <td><button id="Nominate" type="button" value={{result.imdbID}} name="Nominate">Nominate</button></td>
 </tr>
 {% endfor %}
 </table>
+<table>
+<th><header>
+Nominations:
+</header></th>
+<tr>
+<td>
+</td>
+</tr>
+</table>
+</div>
 {% endblock %}
