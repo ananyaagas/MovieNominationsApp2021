@@ -15,34 +15,43 @@ body {
 
 /* Style the header */
 header {
-  background-color: #666;
+  background-color:  #f4eff6;
   padding: 30px;
   text-align: center;
+  font-family: Times
   font-size: 35px;
-  color: white;
+  color: black;
 }
 
 /* Create two columns/boxes that floats next to each other */
 nav {
   float: left;
   width: 20%;
-  height: 800px; /* only for demonstration, should be removed */
-  background: #ccc;
+  height: 100%; /* only for demonstration, should be removed */
+  background:  #eadeed;
   padding: 20px;
+
 }
 
 /* Style the list inside the menu */
 nav ul {
   list-style-type: none;
   padding: 0;
+  text-align: center;
+  font-family: Times
+  font-size: 35px;
+  color: black;
 }
 
 article {
   float: left;
   padding: 20px;
   width: 80%;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   height: 800px; /* only for demonstration, should be removed */
+  font-family: Times
+  font-size: 20px;
+  color: black;
 }
 
 /* Clear floats after the columns */
@@ -54,39 +63,80 @@ section:after {
 
 /* Style the footer */
 footer {
-  background-color: #777;
+  background-color: #fae4e3;
   padding: 10px;
   text-align: center;
-  color: white;
 }
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 @media (max-width: 600px) {
   nav, article {
     width: 100%;
-    height: auto;
+    height: 100%;
   }
 }
+
+.nominatebutton {
+  display: inline-block;
+  padding: 5px 12px;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #c870e0;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px #999;
+}
+
+.nominatebutton:hover {background-color: #c870e0}
+
+.nominatebutton:active {
+  background-color: #d5bfdb;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.removebutton {
+  display: inline-block;
+  padding: 5px 12px;
+  font-size: 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: black;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 3px #999;
+}
+
+.removebutton:hover {background-color: darkgrey}
+
+.removebutton:active {
+  background-color: black;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 </style>
   </head>
   <body>
     <header>
-  <h2>Shopify Python Project</h2>
+  <h2> The Shoppies </h2>
   Welcome {{ username }}!
 </header>
 
 <section>
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="search">Search</a></li>
-    </ul>
-  </nav>
+
        <article>
     {% block content %}{% endblock %}
   </article>
 </section>
-      
+
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   </body>

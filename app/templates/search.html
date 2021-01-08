@@ -8,13 +8,98 @@
 
 <body>
 
-Search: <input type="text" id="search_form_input"></input>
-
-<div id="search_id"></div>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkNominations(){
+    nominations=getCookie("nominations_cookie")
+    console.log("checkNominations - Nominations = "+nominations)
+    if(!(!nominations || nominations.trim().length === 0)) {
+        nominations_array=nominations.split("#");
+        console.log("checkNominations - nominations_array = "+nominations_array)
+        if(nominations_array.length>5){
+            alert("You reached the maximum nominations. You have nominated 5 movies already. Please remove nominations and add new nominations.");
+            return false;
+        } else {
+            storeNominations();
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function storeNominations(){
+    nominations=getCookie("nominations_cookie")
+    console.log("storeNominations - Nominations = " + nominations)
+    if(!(!nominations || nominations.trim().length === 0)) {
+        nominations_array = nominations.split("#");
+        console.log("storeNominations - nominations_array = "+nominations_array)
+        if( nominations_array.length > 0 ){
+            text = "<table>";
+            for (i = 0; i < nominations_array.length; i++) {
+                nomination_items_array = nominations_array[i].split("---");
+
+                image_style = "width:80px;height:120px;";
+                poster_url = nomination_items_array[3];
+                title = nomination_items_array[1];
+
+                text=text+"<tr>";
+                text=text+
+                    "<td><img src='"+poster_url+"'"
+                    +" alt='"+title+"'"
+                    +" style='"+image_style+"' ></td>";
+
+                text=text+
+                    "<td>"+nomination_items_array[1]
+                    +" ("+nomination_items_array[2]+")</td>";
+
+                identifier_value = nomination_items_array[0]
+                    +"---"+nomination_items_array[1]
+                    +"---"+nomination_items_array[2]
+                    +"---"+nomination_items_array[3];
+                classname="removebutton";
+                buttontype="submit";
+                onclick_text="removeNomination(this)";
+
+                text=text
+                    +"<td><button"
+                    +" id='"+identifier_value+"'"
+                    +" class='"+classname+"'"
+                    +" type='"+buttontype+"'"
+                    +" value='"+identifier_value+"'"
+                    +" onclick='"+onclick_text+"'"
+                    +" >Remove</button></td>";
+
+                text=text+"</tr>"
+            }
+            text = text+"</table>";
+            document.getElementById("nominations_id").innerHTML=text;
+        }
+    } else {
+        document.getElementById("nominations_id").innerHTML="No nominations at the moment";
+    }
+}
+
+</script>
 
 <script>
+$(document).ready(function(){
 $("#search_form_input").keyup(function(){
     var text = $(this).val();
 
@@ -30,6 +115,52 @@ $("#search_form_input").keyup(function(){
       }
     });
 });
+
+$("button").click(function(){
+    var id = $(this).attr("id");
+    id=id.replace("\342\200\223"," to ")
+    var className = $(this).attr("class");
+    console.log(className);
+    console.log(id);
+    $.ajax({
+      url: "/nominate",
+      type: "get",
+      data: {jsdata: id},
+      success: function(response) {
+          if(checkNominations()){
+              document.getElementById(id).disabled = true ;
+              document.getElementById(id).style.background = "grey" ;
+          } else {
+            console.log("Check nominations returned false for nominate")
+          }
+      },
+      error: function(xhr) {
+        //Do Something to handle error
+      }
+    });
+    });
+});
+</script>
+<script>
+function removeNomination(btn) {
+    var id = $(btn).attr("id");
+    id=id.replace("\342\200\223"," to ")
+    var className = $(btn).attr("class");
+
+    $.ajax({
+      url: "/remove",
+      type: "get",
+      data: {jsdata: id},
+      success: function(response) {
+              console.log("this works!");
+              storeNominations();
+      },
+      error: function(xhr) {
+        //Do Something to handle error
+        console.log(xhr);
+      }
+    });
+}
 </script>
 
 </body>
@@ -38,13 +169,15 @@ $("#search_form_input").keyup(function(){
 {% extends "base.html" %}
 {% block content %}
 
-<!--{{results.Search}}-->
-<div id="box">
+<div id="box" >
+Search: <input type="text" id="search_form_input"></input>
+
+<div id="search_id">
+<br/>
 <table style="float:left;width:50%;">
 <tr>
 <th colspan = 3> <header>
 Results of your search:
-
 </header></th></tr>
 {% for result in results.Search %}
 <th></th>
@@ -52,13 +185,13 @@ Results of your search:
 </tr>
 <tr>
 <td>
-<img src={{result.Poster}} alt={{result.Title}} style="width:30%;height:32%;">
+<img src="{{result.Poster}}" alt="{{result.Title}}" style="width:80px;height:120px;">
 </td>
 <td>
-        {{ result.Title }}
-        ({{ result.Year }})
-    </td>
-    <td><button id="Nominate" type="button" value={{result.imdbID}} name="Nominate">Nominate</button></td>
+        {{result.Title}}
+        ({{result.Year}})
+</td>
+    <td><button  id="{{result.imdbID}}---{{result.Title}}---{{result.Year}}---{{result.Poster}}" class="nominatebutton" type="submit" value="{{result.imdbID}}---{{result.Title}}---{{result.Year}}---{{result.Poster}}">Nominate</button></td>
 </tr>
 {% endfor %}
 </table>
@@ -68,8 +201,10 @@ Nominations:
 </header></th>
 <tr>
 <td>
+<div id = "nominations_id"></div>
 </td>
 </tr>
 </table>
+</div>
 </div>
 {% endblock %}
