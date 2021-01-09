@@ -66,8 +66,6 @@ def nominate():
 
    text = request.args.get('jsdata').replace("\"","")
    print("before Removing the cookie\n"+text)
-   text = text.replace("\342\200\223","-")
-   print("After Removing the encoded dash\n"+text)
 
    resp = make_response(render_template('readcookie.html'))
    if not nominations_val:
@@ -84,8 +82,6 @@ def remove():
 
    text = request.args.get('jsdata').replace("\"","")
    print("before Removing the cookie\n"+text)
-   text = text.replace("\342\200\223","-")
-   print("After Removing the encoded dash\n"+text)
 
    new_val=""
    nominations_array=nominations_val.split("#")

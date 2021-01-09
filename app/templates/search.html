@@ -28,15 +28,13 @@ function getCookie(cname) {
 
 function checkNominations(){
     nominations=getCookie("nominations_cookie")
-    console.log("checkNominations - Nominations = "+nominations)
     if(!(!nominations || nominations.trim().length === 0)) {
         nominations_array=nominations.split("#");
-        console.log("checkNominations - nominations_array = "+nominations_array)
         if(nominations_array.length>5){
             alert("You reached the maximum nominations. You have nominated 5 movies already. Please remove nominations and add new nominations.");
             return false;
         } else {
-            storeNominations();
+            showNominations();
             return true;
         }
     }
@@ -44,12 +42,10 @@ function checkNominations(){
     return false;
 }
 
-function storeNominations(){
+function showNominations(){
     nominations=getCookie("nominations_cookie")
-    console.log("storeNominations - Nominations = " + nominations)
     if(!(!nominations || nominations.trim().length === 0)) {
         nominations_array = nominations.split("#");
-        console.log("storeNominations - nominations_array = "+nominations_array)
         if( nominations_array.length > 0 ){
             text = "<table>";
             for (i = 0; i < nominations_array.length; i++) {
@@ -57,8 +53,11 @@ function storeNominations(){
 
                 image_style = "width:80px;height:120px;";
                 poster_url = nomination_items_array[3];
-                title = nomination_items_array[1];
 
+                title = decodeURI(atob(nomination_items_array[1]));
+                
+                year = decodeURI(atob(nomination_items_array[2]));
+                
                 text=text+"<tr>";
                 text=text+
                     "<td><img src='"+poster_url+"'"
@@ -66,8 +65,8 @@ function storeNominations(){
                     +" style='"+image_style+"' ></td>";
 
                 text=text+
-                    "<td>"+nomination_items_array[1]
-                    +" ("+nomination_items_array[2]+")</td>";
+                    "<td>"+title
+                    +" ("+year+")</td>";
 
                 identifier_value = nomination_items_array[0]
                     +"---"+nomination_items_array[1]
@@ -110,7 +109,6 @@ $(document).ready(function(){
         dataType: "json",
         data: {jsdata: text},
         success: function(response) {
-          console.log(response.Search);
           results_array=response.Search;
 
           if(results_array){
@@ -118,8 +116,8 @@ $(document).ready(function(){
             for (i = 0; i < results_array.length; i++) {
 
               results_id_key=results_array[i].imdbID
-                      +"---"+results_array[i].Title
-                      +"---"+results_array[i].Year
+                      +"---"+btoa(encodeURI(results_array[i].Title))
+                      +"---"+btoa(encodeURI(results_array[i].Year))
                       +"---"+results_array[i].Poster;
               
               onclick_text="nominate(this)";
@@ -152,40 +150,12 @@ $(document).ready(function(){
       });
   });
 
-  $("button").click(function(){
-      var id = $(this).attr("id");
-      id=id.replace("\342\200\223"," to ")
-      var className = $(this).attr("class");
-      console.log(className);
-      console.log(id);
-      $.ajax({
-          url: "/nominate",
-          type: "get",
-          data: {jsdata: id},
-          success: function(response) {
-              if(checkNominations()){
-                  document.getElementById(id).disabled = true ;
-                  document.getElementById(id).style.background = "grey" ;
-              } else {
-                console.log("Check nominations returned false for nominate")
-              }
-          },
-          error: function(xhr) {
-            //Do Something to handle error
-          }
-        });
-
-      });
-
 });
 </script>
 <script>
 function nominate(btn){
   var id = $(btn).attr("id");
-    id=id.replace("\342\200\223"," to ")
-    var className = $(btn).attr("class");
-    console.log(className);
-    console.log(id);
+    // var className = $(btn).attr("class");
     $.ajax({
       url: "/nominate",
       type: "get",
@@ -194,8 +164,6 @@ function nominate(btn){
           if(checkNominations()){
               document.getElementById(id).disabled = true ;
               document.getElementById(id).style.background = "grey" ;
-          } else {
-            console.log("Check nominations returned false for nominate")
           }
       },
       error: function(xhr) {
@@ -206,22 +174,43 @@ function nominate(btn){
 
 function removeNomination(btn) {
     var id = $(btn).attr("id");
-    id=id.replace("\342\200\223"," to ")
-    var className = $(btn).attr("class");
+    // var className = $(btn).attr("class");
 
     $.ajax({
       url: "/remove",
       type: "get",
       data: {jsdata: id},
       success: function(response) {
-              console.log("this works!");
-              storeNominations();
+              showNominations();
+              enableNominateButton(id);              
       },
       error: function(xhr) {
         //Do Something to handle error
         console.log(xhr);
       }
     });
+}
+
+function enableNominateButton(id){
+
+  nominatebutton_array=document.getElementsByClassName('nominatebutton');
+  button_to_enable=null;
+  console.log(id);
+  id_text=""+id;
+  for(i=0;i<nominatebutton_array.length;i++){
+      console.log(nominatebutton_array[i].id);
+      current_id_text=""+nominatebutton_array[i].id;
+
+      if(id_text == current_id_text){        
+        button_to_enable=nominatebutton_array[i];
+        console.log("Matched");
+      }
+  }
+  if(button_to_enable){
+    button_to_enable.disabled = false ;
+    button_to_enable.style.background = "#c870e0" ;
+  }
+  
 }
 </script>
 
