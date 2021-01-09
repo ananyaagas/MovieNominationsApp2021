@@ -1,5 +1,7 @@
 import requests
 from flask import Flask, render_template, request, make_response
+from flask import json
+
 app= Flask(__name__)
 
 @app.route('/')
@@ -22,6 +24,25 @@ def search():
     resp.set_cookie('nominations_cookie', "", expires=0)
 
     return render_template('search.html', error=error, results=results, username=username, resp=resp)
+
+@app.route("/movies")
+def movies():
+    text = request.args.get('jsdata')
+    #TODO: if text is empty don't return anything
+    query = {}
+    data = requests.get('http://www.omdbapi.com/?s={}&apikey=85a80fa6'.format(text), params=query)
+    print(data.json())
+    error=None
+    username = request.cookies.get('username')
+
+    resp = make_response(render_template('readcookie.html'))
+    resp.set_cookie('nominations_cookie', "", expires=0)
+
+    response = app.response_class(
+        response=data.json(),
+        mimetype='application/json'
+    )
+    return data.json()
 
 @app.route('/setcookie', methods = ['POST', 'GET'])
 def setcookie():
