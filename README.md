@@ -32,7 +32,7 @@ A webpage that can search the website OMDB for movies and display the results, a
 **Click on the link provided in the top right hand corner of this repo :**
 
 **Step One:**
-Log in with your 'username'. This is just so the page can personalize to you! Type in any name, you'll notice that there's no password required.
+Log in with your 'username'. This is just so the page can personalize to you, it will say "Welcome [username]" Type in any name, you'll notice that there's no password required.
 
 [Step One Image](https://drive.google.com/file/d/16fCMxVyTbQycNhgJlfUOSxt2dUNhcjqL/preview)
 
