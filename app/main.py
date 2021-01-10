@@ -10,25 +10,17 @@ def index():
 
 @app.route("/search")
 def search():
-    text = request.args.get('jsdata')
-    #TODO: if text is empty don't return anything
-    query = {}
-    results = []
-    response = requests.get('http://www.omdbapi.com/?s={}&apikey=85a80fa6'.format(text), params=query)
-    print(response.json())
-    results = response.json()
-    error=None
+
     username = request.cookies.get('username')
 
     resp = make_response(render_template('readcookie.html'))
     resp.set_cookie('nominations_cookie', "", expires=0)
 
-    return render_template('search.html', error=error, results=results, username=username, resp=resp)
+    return render_template('search.html', username=username, resp=resp)
 
 @app.route("/movies")
 def movies():
     text = request.args.get('jsdata')
-    #TODO: if text is empty don't return anything
     query = {}
     data = requests.get('http://www.omdbapi.com/?s={}&apikey=85a80fa6'.format(text), params=query)
     print(data.json())
@@ -65,7 +57,6 @@ def nominate():
    nominations_val = request.cookies.get('nominations_cookie')
 
    text = request.args.get('jsdata').replace("\"","")
-   print("before Removing the cookie\n"+text)
 
    resp = make_response(render_template('readcookie.html'))
    if not nominations_val:
@@ -81,11 +72,9 @@ def remove():
    nominations_val = request.cookies.get('nominations_cookie')
 
    text = request.args.get('jsdata').replace("\"","")
-   print("before Removing the cookie\n"+text)
 
    new_val=""
    nominations_array=nominations_val.split("#")
-   print("Cookie list :\n",nominations_array)
 
    for item in nominations_array:
        if new_val == "" and item != text:
