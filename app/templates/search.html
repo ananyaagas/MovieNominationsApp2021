@@ -47,7 +47,7 @@ function showNominations(){
     if(!(!nominations || nominations.trim().length === 0)) {
         nominations_array = nominations.split("#");
         if( nominations_array.length > 0 ){
-            text = "<table>";
+            text = "<table style='vertical-align: top;''>";
             for (i = 0; i < nominations_array.length; i++) {
                 nomination_items_array = nominations_array[i].split("---");
 
@@ -156,15 +156,23 @@ $(document).ready(function(){
 function nominate(btn){
   var id = $(btn).attr("id");
     // var className = $(btn).attr("class");
+    nominations=getCookie("nominations_cookie")
+    if(!(!nominations || nominations.trim().length === 0)) {
+      nominations_array=nominations.split("#");
+      if(nominations_array.length>=5){
+          alert("You reached the maximum nominations. You have nominated 5 movies already. Please remove nominations and add new nominations.");
+          return;
+      }
+    }
+
     $.ajax({
       url: "/nominate",
       type: "get",
       data: {jsdata: id},
       success: function(response) {
-          if(checkNominations()){
-              document.getElementById(id).disabled = true ;
-              document.getElementById(id).style.background = "grey" ;
-          }
+          showNominations();
+          document.getElementById(id).disabled = true ;
+          document.getElementById(id).style.background = "grey" ;          
       },
       error: function(xhr) {
         //Do Something to handle error
@@ -197,14 +205,12 @@ function enableNominateButton(id){
   button_to_enable=null;
   id_text=id;
   id_text=id_text.replace(/["']/g, "");
-  console.log(id_text);
 
   for(i=0;i<nominatebutton_array.length;i++){
       current_id_text=""+nominatebutton_array[i].id;
 
       if(id_text == current_id_text){        
         button_to_enable=nominatebutton_array[i];
-        console.log(button_to_enable);
         button_to_enable.disabled = false ;
         button_to_enable.style.background = "#c870e0" ;
       }
