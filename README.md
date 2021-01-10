@@ -32,23 +32,26 @@ A webpage that can search the website OMDB for movies and display the results, a
 **Click on the link provided in the top right hand corner of this repo :**
 
 **Step One:**
-Log in with your 'username'. This is just so the page can personalize to you, it will say "Welcome [username]" Type in any name, you'll notice that there's no password required.
+Log in with your 'username'. This is just so the page can personalize to you, it will say "Welcome [username]" Type in any name, there's no password required.
 
 [Step One Image](https://drive.google.com/file/d/16fCMxVyTbQycNhgJlfUOSxt2dUNhcjqL/preview)
 
 **Step Two:**
-Make a search request. As you type, notice the list of search results changes dynamically. Look up your 5 favorite movies of all time, and nominate them. 
+Make a search request. As you type, observe that the list of search results changes dynamically. Look up your 5 favorite movies of all time, and nominate them. 
 
 [Step Two Image](https://drive.google.com/file/d/1himxP_FF3iUe1Z9lA6OYu7efkwA9YSZL/preview)
 
 **Step Three:**
-If you exceed 5 nominations, there will be an alert
+If you exceed 5 nominations, there will be an alert.
 
 [Step Three Image](https://drive.google.com/file/d/1wDsLnLgRCAbpdhfFKWyfgqYyR0HxhA-R/preview)
 
 **Step Four:**
-Remove nominations that you've changed your mind on. Notice that the Nominate button, which was disabled once you clicked it, is now enabled again once you remove the nomintation.
+Remove nominations that you've changed your mind on. 
 
 [Step Four Image (part one)](https://drive.google.com/file/d/1pJdePIwXcMulD-g2aK6MD60vb4xjCVa3/preview)
+
+
+Notice that the Nominate button, which was disabled once you clicked it, is now enabled again once you remove the nomintation.
 
 [Step Four Image (part two)](https://drive.google.com/file/d/1GNTV2MwZwB0V3Q2828TIxtBL6wFzNVIt/preview)
