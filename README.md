@@ -33,16 +33,21 @@ A webpage that can search the website OMDB for movies and display the results, a
 
 **Step One:**
 Log in with your 'username'. This is just so the page can personalize to you! Type in any name, you'll notice that there's no password required.
-<iframe src="https://drive.google.com/file/d/16fCMxVyTbQycNhgJlfUOSxt2dUNhcjqL/preview" width="640" height="480"></iframe>
+[Step One Tutorial](https://drive.google.com/file/d/16fCMxVyTbQycNhgJlfUOSxt2dUNhcjqL/preview)
 
 **Step Two:**
 Make a search request. As you type, notice the list of search results changes dynamically. Look up your 5 favorite movies of all time, and nominate them. 
-<iframe src="https://drive.google.com/file/d/1himxP_FF3iUe1Z9lA6OYu7efkwA9YSZL/preview" width="640" height="480"></iframe>
 
+[Step Two Tutorial](https://drive.google.com/file/d/1himxP_FF3iUe1Z9lA6OYu7efkwA9YSZL/preview)
+
+**Step Three:**
 If you exceed 5 nominations, there will be an alert
-<iframe src="https://drive.google.com/file/d/1wDsLnLgRCAbpdhfFKWyfgqYyR0HxhA-R/preview" width="640" height="480"></iframe>
+
+[Step Three Tutorial](https://drive.google.com/file/d/1wDsLnLgRCAbpdhfFKWyfgqYyR0HxhA-R/preview)
 
 **Step Four:**
 Remove nominations that you've changed your mind on. Notice that the Nominate button, which was disabled once you clicked it, is now enabled again once you remove the nomintation.
-<iframe src="https://drive.google.com/file/d/1pJdePIwXcMulD-g2aK6MD60vb4xjCVa3/preview" width="640" height="480"></iframe>  
-<iframe src="https://drive.google.com/file/d/1tCq151H-DsNzPQKZ-Dim4HF5XDulvsXe/preview" width="640" height="480"></iframe>
+
+[Step Four Tutorial (part one)](https://drive.google.com/file/d/1pJdePIwXcMulD-g2aK6MD60vb4xjCVa3/preview)
+
+[Step Four Tutorial (part two)](https://drive.google.com/file/d/1tCq151H-DsNzPQKZ-Dim4HF5XDulvsXe/preview)
