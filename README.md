@@ -51,4 +51,4 @@ Remove nominations that you've changed your mind on. Notice that the Nominate bu
 
 [Step Four Image (part one)](https://drive.google.com/file/d/1pJdePIwXcMulD-g2aK6MD60vb4xjCVa3/preview)
 
-[Step Four Image (part two)](https://drive.google.com/file/d/1tCq151H-DsNzPQKZ-Dim4HF5XDulvsXe/preview)
+[Step Four Image (part two)](https://drive.google.com/file/d/1GNTV2MwZwB0V3Q2828TIxtBL6wFzNVIt/preview)
