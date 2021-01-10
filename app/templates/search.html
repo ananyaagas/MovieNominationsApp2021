@@ -195,20 +195,19 @@ function enableNominateButton(id){
 
   nominatebutton_array=document.getElementsByClassName('nominatebutton');
   button_to_enable=null;
-  console.log(id);
-  id_text=""+id;
+  id_text=id;
+  id_text=id_text.replace(/["']/g, "");
+  console.log(id_text);
+
   for(i=0;i<nominatebutton_array.length;i++){
-      console.log(nominatebutton_array[i].id);
       current_id_text=""+nominatebutton_array[i].id;
 
       if(id_text == current_id_text){        
         button_to_enable=nominatebutton_array[i];
-        console.log("Matched");
+        console.log(button_to_enable);
+        button_to_enable.disabled = false ;
+        button_to_enable.style.background = "#c870e0" ;
       }
-  }
-  if(button_to_enable){
-    button_to_enable.disabled = false ;
-    button_to_enable.style.background = "#c870e0" ;
   }
   
 }
