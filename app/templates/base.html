@@ -9,50 +9,27 @@
   box-sizing: border-box;
 }
 
+input[type=text] {
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #74956c;
+}
+
 body {
   font-family: Times;
 }
 
 /* Style the header */
 header {
-  background-color:  #f4eff6;
+  background-color:  #ddf5da;
   padding: 30px;
   text-align: center;
-  font-family: Times
-  font-size: 35px;
-  color: black;
-  vertical-align: top;
-}
-
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: left;
-  width: 20%;
-  height: 100%; /* only for demonstration, should be removed */
-  background:  #eadeed;
-  padding: 20px;
-
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-  text-align: center;
-  font-family: Times
-  font-size: 35px;
-  color: black;
-}
-
-article {
-  float: left;
-  padding: 20px;
-  width: 80%;
-  background-color: #ffffff;
-  height: 800px; /* only for demonstration, should be removed */
-  font-family: Times
+  font-family: Times;
   font-size: 20px;
   color: black;
+  vertical-align: top;
+  border-radius: 15px;
+
 }
 
 /* Clear floats after the columns */
@@ -64,7 +41,7 @@ section:after {
 
 /* Style the footer */
 footer {
-  background-color: #fae4e3;
+  background-color: #ddf5da;
   padding: 10px;
   text-align: center;
 }
@@ -80,22 +57,23 @@ footer {
 .nominatebutton {
   display: inline-block;
   padding: 5px 12px;
-  font-size: 10px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   outline: none;
-  color: #fff;
-  background-color: #c870e0;
+  color: white;
+  background-color: #74956c;
   border: none;
   border-radius: 15px;
   box-shadow: 0 3px #999;
 }
 
-.nominatebutton:hover {background-color: #c870e0}
+.nominatebutton:hover {background-color: #ddf5da; color: black;}
 
 .nominatebutton:active {
-  background-color: #d5bfdb;
+  background-color: #74956c;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
@@ -103,7 +81,8 @@ footer {
 .removebutton {
   display: inline-block;
   padding: 5px 12px;
-  font-size: 10px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -115,7 +94,7 @@ footer {
   box-shadow: 0 3px #999;
 }
 
-.removebutton:hover {background-color: darkgrey}
+.removebutton:hover {background-color: #ddf5da; color: black;}
 
 .removebutton:active {
   background-color: black;
@@ -125,14 +104,28 @@ footer {
 
 td,th {
   vertical-align: top;
+  padding: 8px;
+  font-size: 16px;
 }
+
+table{
+  vertical-align: center;
+  width: 80%;
+}
+
+img {
+  width: 90px; 
+  height: 120px; 
+  box-shadow: 5px 5px 4px lightgrey;
+}
+
 
 </style>
   </head>
   <body>
     <header>
-  <h2> The Shoppies </h2>
-  <h4>Hello, and welcome {{ username }}!</h4>
+  <h2> The Shoppies: Movie Awards for Entrepreuners </h2>
+  <h4> Hello {{ username }}!</h4>
 </header>
 
 <section>
